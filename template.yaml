@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM Template for file-uploader-react-go-lambda-s3
+
+Parameters:
+  Environment:
+    Type: String
+    Default: Local
+    Description: Environment name
+    AllowedValues: [Local, Development]
+    ConstraintDescription: Must be Local or Development
+  Region:
+    Type: String
+    Description: AWS Region
+    AllowedValues: [us-east-1, us-east-2, us-west-1, us-west-2]
+    ConstraintDescription: Must be us-east-1, us-east-2, us-west-1, or us-west-2, allowed values are for demonstration purposes
+  BucketName:
+    Type: String
+    Description: S3 Bucket Name
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+    LoggingConfig:
+      LogFormat: JSON
+  Api:
+    Cors:
+      AllowMethods: "'*'"
+      AllowHeaders: "'*'"
+      AllowOrigin: "'*'"
+    BinaryMediaTypes: # the following media types will be base64 encoded by API Gateway and have request.IsBase64Encoded set to true
+      - image/png
+      - image/jpeg
+      - application/octet-stream
+      - "multipart/form-data"
+      - "multipart/*"
+Resources:
+  RestApiFunctionLocal:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: backend/
+      Handler: bootstrap
+      Runtime: provided.al2023
+      Architectures: [arm64]
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: "/api/{proxy+}"
+            Method: ANY
+      Environment:
+        Variables:
+          ENV: !Ref Environment
+          REGION: !Ref Region
+          BUCKET_NAME: !Ref BucketName
+
+Outputs:
+  RestApiFunctionLocal:
+    Description: Lambda Function ARN
+    Value: !GetAtt RestApiFunctionLocal.Arn
