@@ -143,117 +143,111 @@ function App() {
   };
 
   return (
-    <>
-      <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-        <h1>Image Upload Methods Test</h1>
-        
-        {/* File Selection */}
-        <div style={{ marginBottom: '30px', padding: '20px', border: '2px solid #ccc', borderRadius: '8px' }}>
-          <h2>File Selection</h2>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            style={{ display: 'none' }}
-          />
-          <button 
-            onClick={handleButtonClick}
-            style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
-          >
-            Select Image File
-          </button>
-          {selectedFile && (
-            <p style={{ marginTop: '10px', color: '#333' }}>
-              Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
-            </p>
-          )}
-        </div>
-
-        {/* Upload Methods - Horizontal Layout */}
-        <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', flexWrap: 'wrap' }}>
-          {/* Method 1: Raw Binary */}
-          <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #ff6b6b', borderRadius: '8px' }}>
-            <h2 style={{ color: '#ff6b6b', margin: '0 0 10px 0', fontSize: '18px' }}>Method 1: Raw Binary Data</h2>
-            <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Sends the file directly as binary data in the request body</p>
-            <button 
-              onClick={uploadRawBinary}
-              disabled={!selectedFile}
-              style={{ 
-                padding: '10px 20px', 
-                fontSize: '14px', 
-                cursor: selectedFile ? 'pointer' : 'not-allowed',
-                backgroundColor: '#ff6b6b',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                width: '100%'
-              }}
-            >
-              Upload Raw Binary
-            </button>
-          </div>
-
-          {/* Method 2: Form Data */}
-          <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #4ecdc4', borderRadius: '8px' }}>
-            <h2 style={{ color: '#4ecdc4', margin: '0 0 10px 0', fontSize: '18px' }}>Method 2: Multipart Form Data</h2>
-            <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Uses FormData for multipart/form-data encoding (standard file upload)</p>
-            <button 
-              onClick={uploadFormData}
-              disabled={!selectedFile}
-              style={{ 
-                padding: '10px 20px', 
-                fontSize: '14px', 
-                cursor: selectedFile ? 'pointer' : 'not-allowed',
-                backgroundColor: '#4ecdc4',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                width: '100%'
-              }}
-            >
-              Upload Form Data
-            </button>
-          </div>
-
-          {/* Method 3: Base64 */}
-          <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #45b7d1', borderRadius: '8px' }}>
-            <h2 style={{ color: '#45b7d1', margin: '0 0 10px 0', fontSize: '18px' }}>Method 3: Base64 Encoded</h2>
-            <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Converts image to base64 string and sends as JSON</p>
-            <button 
-              onClick={uploadBase64}
-              disabled={!selectedFile}
-              style={{ 
-                padding: '10px 20px', 
-                fontSize: '14px', 
-                cursor: selectedFile ? 'pointer' : 'not-allowed',
-                backgroundColor: '#45b7d1',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                width: '100%'
-              }}
-            >
-              Upload Base64
-            </button>
-          </div>
-        </div>
-
-        {/* Status Display */}
-        {uploadStatus && (
-          <div style={{ 
-            marginTop: '20px', 
-            padding: '15px', 
-            backgroundColor: uploadStatus.includes('successful') ? '#d4edda' : '#f8d7da',
-            color: uploadStatus.includes('successful') ? '#155724' : '#721c24',
-            border: `1px solid ${uploadStatus.includes('successful') ? '#c3e6cb' : '#f5c6cb'}`,
-            borderRadius: '4px'
-          }}>
-            <strong>Status:</strong> {uploadStatus}
-          </div>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>Image Upload Methods Test</h1>
+      
+      {/* File Selection */}
+      <div style={{ marginBottom: '30px', padding: '20px', border: '2px solid #ccc', borderRadius: '8px' }}>
+        <h2>File Selection</h2>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept="image/*"
+          style={{ display: 'none' }}
+        />
+        <button 
+          onClick={handleButtonClick}
+          style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+        >
+          Select Image File
+        </button>
+        {selectedFile && (
+          <p style={{ marginTop: '10px', color: '#333' }}>
+            Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
+          </p>
         )}
       </div>
-    </>
+      {/* Upload Methods - Horizontal Layout */}
+      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', flexWrap: 'wrap' }}>
+        {/* Method 1: Raw Binary */}
+        <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #ff6b6b', borderRadius: '8px' }}>
+          <h2 style={{ color: '#ff6b6b', margin: '0 0 10px 0', fontSize: '18px' }}>Method 1: Raw Binary Data</h2>
+          <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Sends the file directly as binary data in the request body</p>
+          <button 
+            onClick={uploadRawBinary}
+            disabled={!selectedFile}
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '14px', 
+              cursor: selectedFile ? 'pointer' : 'not-allowed',
+              backgroundColor: '#ff6b6b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              width: '100%'
+            }}
+          >
+            Upload Raw Binary
+          </button>
+        </div>
+        {/* Method 2: Form Data */}
+        <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #4ecdc4', borderRadius: '8px' }}>
+          <h2 style={{ color: '#4ecdc4', margin: '0 0 10px 0', fontSize: '18px' }}>Method 2: Multipart Form Data</h2>
+          <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Uses FormData for multipart/form-data encoding (standard file upload)</p>
+          <button 
+            onClick={uploadFormData}
+            disabled={!selectedFile}
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '14px', 
+              cursor: selectedFile ? 'pointer' : 'not-allowed',
+              backgroundColor: '#4ecdc4',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              width: '100%'
+            }}
+          >
+            Upload Form Data
+          </button>
+        </div>
+        {/* Method 3: Base64 */}
+        <div style={{ flex: '1', minWidth: '280px', padding: '20px', border: '2px solid #45b7d1', borderRadius: '8px' }}>
+          <h2 style={{ color: '#45b7d1', margin: '0 0 10px 0', fontSize: '18px' }}>Method 3: Base64 Encoded</h2>
+          <p style={{ margin: '0 0 15px 0', fontSize: '14px', lineHeight: '1.4' }}>Converts image to base64 string and sends as JSON</p>
+          <button 
+            onClick={uploadBase64}
+            disabled={!selectedFile}
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '14px', 
+              cursor: selectedFile ? 'pointer' : 'not-allowed',
+              backgroundColor: '#45b7d1',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              width: '100%'
+            }}
+          >
+            Upload Base64
+          </button>
+        </div>
+      </div>
+      {/* Status Display */}
+      {uploadStatus && (
+        <div style={{ 
+          marginTop: '20px', 
+          padding: '15px', 
+          backgroundColor: uploadStatus.includes('successful') ? '#d4edda' : '#f8d7da',
+          color: uploadStatus.includes('successful') ? '#155724' : '#721c24',
+          border: `1px solid ${uploadStatus.includes('successful') ? '#c3e6cb' : '#f5c6cb'}`,
+          borderRadius: '4px'
+        }}>
+          <strong>Status:</strong> {uploadStatus}
+        </div>
+      )}
+    </div>
   )
 }
 
