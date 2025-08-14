@@ -33,6 +33,7 @@ Globals:
     BinaryMediaTypes: # the following media types will be base64 encoded by API Gateway and have request.IsBase64Encoded set to true
       - image/png
       - image/jpeg
+      - image/gif
       - application/octet-stream
       - "multipart/form-data"
       - "multipart/*"
