@@ -4,7 +4,7 @@ Upload a image file to a s3 bucket through a react web app and go lambda backend
 ## Prerequisites
 
 ### Frontend Tools
-- [Yarn](https://yarnpkg.com/getting-started/install)
+- [vite](https://vite.dev/)
 
 ### Backend Tools
 - [Go 1.24.2](https://go.dev/doc/install)
@@ -19,7 +19,7 @@ Upload a image file to a s3 bucket through a react web app and go lambda backend
 
 ## Setup
 - Clone the repository `git clone https://github.com/thomasmendez/file-uploader-react-go-lambda-s3.git`
-- Install dependencies `cd frontend && yarn install`, `cd backend && go mod tidy`
+- Install dependencies `cd frontend && npm run install`, `cd backend && go mod tidy`
 - Configure AWS CLI
 - Configure SAM CLI
 - Deploy SAM template
@@ -29,7 +29,7 @@ Upload a image file to a s3 bucket through a react web app and go lambda backend
 ## Local Development
 You will need to open a few terminals to run the application:
 
-1. Run the React app `cd frontend && yarn dev`
+1. Run the React app `cd frontend && npm run dev`
 2. Build the bootstrap file `cd backend && GOARCH=arm64 GOOS=linux go build -o bootstrap main.go`
 3. Zip the bootstrap file `cd backend` and `C:\Users\<user>\go\bin\build-lambda-zip.exe -o lambda-handler.zip bootstrap` (on Windows Powershell)
 4. Start Docker Desktop
